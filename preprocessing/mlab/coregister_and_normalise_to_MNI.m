@@ -16,11 +16,11 @@ data_path = '/home/klug/working_data/ed_transfer_rs/RS/';
 spm_path = '/home/klug/spm12';
 reference_path = '/home/klug/working_data/ed_transfer_rs/MNI152_T1_2mm.nii';
 
-T1_regex = '^sY.*\.nii$';
-functional_regex = '^rfY.*\.nii$';
+T1_regex = '^s.*\.nii$';
+functional_regex = '^rf.*\.nii$';
 
-coreg_T1_regex = '^coreg_sY.*\.nii$';
-coreg_functional_regex = '^coreg_rfY.*\.nii$';
+coreg_T1_regex = '^coreg_s.*\.nii$';
+coreg_functional_regex = '^coreg_rf.*\.nii$';
 
 
 script_path = mfilename('fullpath');
