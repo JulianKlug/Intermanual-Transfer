@@ -12,9 +12,9 @@
 clear all , clc
 %% Specify paths
 % Experiment folder
-data_path = '/Users/jk1/temp/fmri_test/data/test2';
-% spm_path = '/home/klug/spm12';
-reference_path = '/Users/jk1/temp/fmri_test/atlas/MNI152_T1_2mm.nii';
+data_path = '/home/klug/working_data/ed_transfer_rs/RS/';
+spm_path = '/home/klug/spm12';
+reference_path = '/home/klug/working_data/ed_transfer_rs/MNI152_T1_2mm.nii';
 
 T1_regex = '^sY.*\.nii$';
 functional_regex = '^rfY.*\.nii$';
@@ -37,7 +37,7 @@ addpath(reference_path, data_path)
 d = dir(data_path);
 isub = [d(:).isdir]; %# returns logical vector
 subjects = {d(isub).name}';
-subjects(ismember(subjects,{'.','..'})) = [];
+subjects(ismember(subjects,{'.','..', 'CONN'})) = [];
 
 for i = 1: numel ( subjects )
     fprintf('%i/%i (%i%%) \n', i, size(subjects, 1), 100 * i / size(subjects, 1));
