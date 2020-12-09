@@ -49,16 +49,19 @@ for i = 1: numel ( subjects )
     T1_file = cellstr(spm_select('FPlist',fullfile(subj_dir,'/MPRAGE'), T1_regex));
     functional_files = cellstr(spm_select('FPlist',fullfile(subj_dir,'/BOLD','/realigned_Yeo'), functional_regex)); 
     
+    mkdir(fullfile(subj_dir,'/MPRAGE/coreg'))
+    mkdir(fullfile(subj_dir,'/BOLD/realigned_Yeo/coreg'))
+    
     coregistration_to_MNI = coregister_job({reference_path}, T1_file, functional_files);
 
     spm('defaults', 'FMRI');
     spm_jobman('run', coregistration_to_MNI);
 
-    coreg_T1_file = cellstr(spm_select('FPlist',fullfile(subj_dir,'/MPRAGE'), coreg_T1_regex));
-    coreg_functional_files = cellstr(spm_select('FPlist',fullfile(subj_dir,'/BOLD','/realigned_Yeo'), coreg_functional_regex)); 
+    coreg_T1_file = cellstr(spm_select('FPlist',fullfile(subj_dir,'/MPRAGE/coreg'), coreg_T1_regex));
+    coreg_functional_files = cellstr(spm_select('FPlist',fullfile(subj_dir,'/BOLD','/realigned_Yeo', '/coreg'), coreg_functional_regex)); 
 
-    mkdir(fullfile(subj_dir,'/MPRAGE/normalized'))
-    mkdir(fullfile(subj_dir,'/BOLD/realigned_Yeo/normalized'))
+    mkdir(fullfile(subj_dir,'/MPRAGE/coreg/norm'))
+    mkdir(fullfile(subj_dir,'/BOLD/realigned_Yeo/coreg/norm'))
     
     fprintf('Normalising functional to template for subject "%s" \n' ,...
         subjects{i});

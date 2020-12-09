@@ -23,4 +23,4 @@ matlabbatch{1}.spm.spatial.coreg.estwrite.eoptions.fwhm = [7 7];
 matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.interp = 4;
 matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.wrap = [0 0 0];
 matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.mask = 0;
-matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.prefix = 'coreg_';
+matlabbatch{1}.spm.spatial.coreg.estwrite.roptions.prefix = 'coreg/coreg_';
