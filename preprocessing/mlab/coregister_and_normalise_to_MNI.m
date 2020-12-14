@@ -26,7 +26,7 @@ coreg_functional_regex = '^coreg_rf.*\.nii$';
 script_path = mfilename('fullpath');
 script_folder = script_path(1 : end - size(mfilename, 2));
 addpath(genpath(script_folder));
-% addpath(genpath(spm_path));
+addpath(genpath(spm_path));
 
 if ~(exist(data_path))
     fprintf('Data directory does not exist. Please enter a valid directory.')
