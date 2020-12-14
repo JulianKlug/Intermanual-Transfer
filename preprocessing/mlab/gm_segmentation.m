@@ -57,7 +57,7 @@ for i = 1: numel ( subjects )
 
     for func_idx=1:length(functional_files)
         [fPath, fName, fExt] = fileparts(functional_files{func_idx});
-        masked_image_path = fullfile(subj_dir, destination_sub_path, join(['seg_', fName, fExt]));
+        masked_image_path = fullfile(subj_dir, destination_sub_path, strcat('seg_', fName, fExt));
         segmented_gm_file = spm_select('FPlist',fullfile(subj_dir, T1_sub_path), seg_T1_regex);
         apply_mask(functional_files{func_idx}, segmented_gm_file, gm_prob_threshold, masked_image_path)
     end
