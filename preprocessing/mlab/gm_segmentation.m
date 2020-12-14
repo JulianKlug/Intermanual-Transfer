@@ -49,7 +49,7 @@ for i = 1: numel ( subjects )
     T1_file = cellstr(spm_select('FPlist',fullfile(subj_dir, T1_sub_path), T1_regex));
     functional_files = cellstr(spm_select('FPlist',fullfile(subj_dir, functional_sub_path), functional_regex)); 
        
-    segment_anatomical = segment_job(T1_file);
+    segment_anatomical = segment_job(T1_file, spm_path);
     spm('defaults', 'FMRI');
     spm_jobman('run', segment_anatomical);
      
