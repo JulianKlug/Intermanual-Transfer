@@ -1,6 +1,14 @@
 %%% Preprocess functional matrices
 % - Matrices should not be hidden in struct
 % - Matrices should be timepoints*regions
+% - Matrices should not contain signals with zero variance --> regions with
+% zero variance are removed (necessary for standardisation)
+
+% Output:
+% - out_matrix_name.mat (default combined_sessions_TCA.mat); matrix of all
+%   timepoints across all subjects (timepoints x regions)
+% - index_to_region_mapping.mat; mapping of region index in out_matrix to
+% region index in in_matrix (as some regions were dropped)
 
 clear; clc;
 

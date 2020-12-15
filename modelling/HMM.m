@@ -1,8 +1,4 @@
-% Code used in Vidaurre et al. (2017) PNAS
-%
-% Detailed documentation and further examples can be found in:
-% https://github.com/OHBA-analysis/HMM-MAR
-% This pipeline must be adapted to your particular configuration of files. 
+% Code derived from Vidaurre et al. (2017) PNAS
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %% SETUP THE MATLAB PATHS AND FILE NAMES
 HMM_toolbox_dir = '/Users/jk1/matlab/toolboxes/HMM-MAR';
