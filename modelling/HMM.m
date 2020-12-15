@@ -12,23 +12,21 @@ K = 12; % no. states
 repetitions = 1; %3; % to run it multiple times (keeping all the results)
 DirData = '/Users/jk1/temp/fmri_test/data/HMM_test/BNA_exp/';
 DirOut = '/Users/jk1/temp/fmri_test/data/HMM_test/BNA_out/';
-matrix_name_regex = '^S[0-9][0-9]_RS[1-2]_TCS.mat$';
+data_matrix_name = 'combined_sessions_TCA.mat';
 
 TR = 0.72;  
 use_stochastic = 0; % set to 1 if you have loads of data
 
 N = 3; % no. subjects
-f = cell(N,1); T = cell(N,1);
-% each .mat file contains the data (ICA components) for a given subject, 
-% in a matrix X of dimension (4800time points by 50 ICA components). 
-% T{j} contains the lengths of each session (in time points)
+n_session_time_points = 475;
+n_sessions_per_subj = 1; % as we regard every session as a distinct subject
 
-matrix_files = cellstr(spm_select('FPlist',DirData, matrix_name_regex)); 
-assert(length(matrix_files) == N, 'Number of matrix files and number of subjects does not correspond.')
-for j=1:N
-    f{j} = matrix_files{j};
-    load(f{j}); T{j} = [475]; %[1200 1200 1200 1200]
-end
+T = repmat(n_session_time_points,1,N);
+% the .mat file contains the data (ICA components) for all subjects, 
+% in a matrix X of dimension (n_session_time_points time points by number of ICA components). 
+% T{j} contains the lengths of each session (in time points)
+ 
+data = load(fullfile(DirData, data_matrix_name));
 
 options = struct();
 options.K = K; % number of states 
@@ -54,9 +52,9 @@ if use_stochastic
     options.BIGbase_weights = 0.9;
 end
 
-% We run the HMM multiple times
+We run the HMM multiple times
 for r = 1:repetitions
-    [hmm, Gamma, ~, vpath] = hmmmar(f,T,options);
+    [hmm, Gamma, ~, vpath] = hmmmar(data,T,options);
     save([DirOut 'HMMrun_rep' num2str(r) '.mat'],'Gamma','vpath','hmm')
     disp(['RUN ' num2str(r)])
 end
@@ -67,7 +65,7 @@ for r = 1:repetitions
     figure(r)
     load([DirOut 'HMMrun_rep' num2str(r) '.mat'],'Gamma','hmm')
     subplot(1,2,1) % Figure 2B
-    GammaSessMean = squeeze(mean(reshape(Gamma,[1200 4 N K]),1));    
+    GammaSessMean = squeeze(mean(reshape(Gamma,[n_session_time_points n_sessions_per_subj N K]),1));    
     GammaSubMean = squeeze(mean(GammaSessMean,1));
     [~,pca1] = pca(GammaSubMean','NumComponents',1);
     [~,ord] = sort(pca1); 
