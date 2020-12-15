@@ -13,9 +13,9 @@ main_path = '/home/klug/working_data/ed_transfer_rs/RS'
 
 # Subject directory pattern in main dir (ex: S01_RS2)
 subject_dir_pattern = re.compile("^S[0-9][0-9]_RS[0-9]$")
-subject_sub_path = 'BOLD/realigned_Yeo/coreg_norm_seg'
+subject_sub_path = 'BOLD/realigned_Yeo/coreg/norm/'
 
-n_clusters = 50
+n_clusters = 100
 
 dataset = []
 failed_subjects = []
