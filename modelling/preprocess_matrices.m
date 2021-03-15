@@ -22,7 +22,12 @@ n_session_time_points = 475;
 matrix_name_regex = '^s.*\.mat$';
 out_matrix_name = 'combined_sessions_TCA';
 
-matrix_files = cellstr(spm_select('FPlist',in_dir, matrix_name_regex)); 
+matrix_files = cellstr(spm_select('FPlist',in_dir, matrix_name_regex));
+% sort files in alphabetical and numerical order
+filenum = cellfun(@(x)sscanf(x, strcat(in_dir, '/s%d.mat')), matrix_files);
+[~,Sidx] = sort(filenum); 
+matrix_files = matrix_files(Sidx);
+
 n_subjects = length(matrix_files);
 T = repmat(n_session_time_points,1,n_subjects);
 fprintf('%i subject sessions found.\n' ,...
