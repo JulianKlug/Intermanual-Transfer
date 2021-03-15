@@ -1,21 +1,18 @@
 import os, time
 import nilearn
-import numpy as np
-from nilearn import plotting
-from nilearn.image import get_data
 from nilearn.regions import Parcellations
 import re
 
 #%%
 
-outdir = '/home/klug/working_data/ed_transfer_rs/'
+outdir = '/home/klug/working_data/ed_transfer_rs/parcellations/parcellation_of_non_segmented'
 main_path = '/home/klug/working_data/ed_transfer_rs/RS'
 
 # Subject directory pattern in main dir (ex: S01_RS2)
 subject_dir_pattern = re.compile("^S[0-9][0-9]_RS[0-9]$")
 subject_sub_path = 'BOLD/realigned_Yeo/coreg/norm/'
 
-n_clusters = 100
+n_clusters = 200
 
 dataset = []
 failed_subjects = []
